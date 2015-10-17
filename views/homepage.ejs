@@ -1,0 +1,25 @@
+<title>Login Homepage</title>
+<div ng-app='homepage'>
+	<div ng-controller='loginController as login'>
+		<button ng-click='login.signUpDisplay=true'>Sign Up</button>
+		<button ng-click='login.signUpDisplay=false'>Log In</button>
+		<form ng-show='login.signUpDisplay' ng-submit='login.signUp()'>
+			<label>Name</label>
+			<input type='text' ng-model='login.signUpName' placeholder='e.g. Nikola Tesla' required></input>
+			<label>Email Address</label>
+			<input type='text' ng-model='login.signUpEmail' placeholder='e.g. foo@boo.com' name='email' required></input>
+			<label>Your Password</label>
+			<input type='text' ng-model='login.signUpPw' required></input>
+			<label>Repeat Password</label>
+			<input type='text' ng-model='login.signUpRepeatPw' required></input>
+			<input type='submit'>Sign Up</input>
+		</form>	
+		<form ng-hide='login.signUpDisplay === true' ng-submit='login.login()'>
+			<label>Email Address</label>
+			<input type='text' ng-model='login.loginEmail' placeholder='e.g. foo@boo.com' name='email' required></input>
+			<label>Your Password</label>	
+			<input type='text' ng-model='login.loginPw' required></input>
+			<input type='submit'></input>
+		</form>
+	</div>
+</div>
