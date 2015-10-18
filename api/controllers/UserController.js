@@ -8,29 +8,11 @@
 var passwords = require('machinepack-passwords');
 var Promise = require('bluebird');
 
-//Session data for sockets
-var Session = function() {
-	this.auth = false;
-	this.usr = {};
-};
-
-var findUser = function(id) {
-	return new Promise(function (resolve, reject) {
-		User.findOne(id).exec(function (error, user) {
-			if (error || !user) {
-				return reject(error);
-			} else {
-				return resolve(user);
-			}
-		});
-	});
-};
-
 findUserByEmail = function (email) {
 	return new Promise(function (resolve, reject) {
 		User.findOne({email: email}).exec(function (error, user) {
 			if (error || !user) {
-				console.log("Can't find a user with requested id");
+				console.log("Can't find a user with requested email");
 				return reject(error);
 			} else {
 				return resolve(user);
@@ -103,7 +85,7 @@ module.exports = {
 	//It will print as undefined for the first request, and populated
 	//in subsequent requests
 	login: function(req, res) {
-		console.log("\nLogin requested from " + req.socket.id + " for email: " + req.socket.email);
+		console.log("\nLogin requested from " + req.socket.id + " for email: " + req.body.email);
 		
 		var promiseUser = findUserByEmail(req.body.email).then(function(user){
 			checkPassword(req.body.pw, user.encryptedPw).then(function(val){

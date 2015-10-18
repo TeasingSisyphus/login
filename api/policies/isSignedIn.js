@@ -6,6 +6,7 @@ module.exports = function isSignedIn (req, res, next) {
 	        if (handshake.session) {
 	        	session = handshake.session;
 	        }
+	        console.log(session);
             if (session.auth) {
             	next();
             } else{
