@@ -7,6 +7,8 @@
 		this.signUpEmail;
 		this.signUpPw;
 		this.signUpRepeatPw;
+		this.loginEmail;
+		this.loginPw;
 		
 		this.signUp = function() {
 			console.log("signing up");
@@ -16,6 +18,11 @@
 				pw: $scope.login.signUpPw
 			}, function(res) {
 				console.log(res);
+				$scope.login.signUpName = '';
+				$scope.login.signUpEmail = '';
+				$scope.login.signUpPw = '';
+				$scope.login.signUpRepeatPw = '';
+				$scope.$apply();
 			});
 		};
 		
@@ -24,7 +31,24 @@
 			io.socket.put('/login', {
 				email: $scope.login.loginEmail,
 				pw: $scope.login.loginPw
-			}, function() {});
+			}, function(res) {
+				console.log(res);
+				$scope.login.loginEmail = '';
+				$scope.login.loginPw = '';
+				$scope.$apply();
+				
+			});
 		};
+		
+		
+		this.amIAuthenticated = function () {
+			console.log("checking authentication status");
+			io.socket.get('/amIAuthenticated', function (res) {
+				console.log(res);
+			});
+		};		
 	});
+	
+
+	
 })();

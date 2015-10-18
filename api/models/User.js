@@ -8,7 +8,18 @@
 module.exports = {
 
   attributes: {
-
+	name: {
+		type: 'string'
+	},
+	email: {
+		type: 'string',
+		required: true,
+		unique: true
+	},
+	encryptedPw: {
+		required: true,
+		type: 'string'
+	}
   }
 };
 
