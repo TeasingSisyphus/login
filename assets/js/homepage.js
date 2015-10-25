@@ -13,7 +13,7 @@
 		this.signUp = function() {
 			console.log("signing up");
 			io.socket.put('/signUp', {
-				name: $scope.signUpName,
+				name: $scope.login.signUpName,
 				email: $scope.login.signUpEmail,
 				pw: $scope.login.signUpPw
 			}, function(res) {
